@@ -22,11 +22,11 @@ script = ExtResource("1_vxft3")
 texture = ExtResource("2_jhgs7")
 offset = Vector2(0, 380)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="ouverture" type="CollisionShape2D" parent="."]
 position = Vector2(0, 118)
 shape = SubResource("RectangleShape2D_4i21e")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="corps" type="CollisionShape2D" parent="."]
 position = Vector2(0, 398)
 shape = SubResource("RectangleShape2D_2ns5x")
 
@@ -35,11 +35,11 @@ texture = ExtResource("2_jhgs7")
 offset = Vector2(0, -380)
 flip_v = true
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+[node name="ouverture2" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -118)
 shape = SubResource("RectangleShape2D_uhmqh")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+[node name="corps2" type="CollisionShape2D" parent="."]
 position = Vector2(0, -398)
 shape = SubResource("RectangleShape2D_smfxm")
 

@@ -67,6 +67,7 @@ func _process(_delta):
 			
 			if not tuyau.scored and tuyau.position.x < $Oiseau.position.x:
 				tuyau.scored = true;
+				tuyau.initial_position = Vector2(tuyau.position);
 				score += 1;
 
 func _on_tuyau_timer_timeout() -> void:
@@ -92,9 +93,13 @@ func generate_pipes():
 		print("Erreur : le signal `hit` n'existe pas dans tuyau.")
 	else:
 		tuyau.hit.connect(oiseau_hit)
+		
+	if score >= 3:
+		tuyau.set_moving(true);
 
 	add_child(tuyau)  # Ajouter correctement à la scène
 	pipes.append(tuyau)  # Ajouter à la liste des tuyaux
 
 func oiseau_hit():
+	print("Hit");
 	pass  # Ajouter la logique pour le cas où l'oiseau touche un tuyau
