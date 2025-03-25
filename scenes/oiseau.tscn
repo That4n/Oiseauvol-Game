@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c5da4645e7pyy"]
 
-[ext_resource type="Script" path="res://oiseau.gd" id="1_nwdek"]
+[ext_resource type="Script" path="res://scenes/oiseau.gd" id="1_nwdek"]
 [ext_resource type="Texture2D" uid="uid://cp6dcuf5gd3u2" path="res://assets/bird1.png" id="2_nqpt1"]
 [ext_resource type="Texture2D" uid="uid://c03o6d8e4xuq7" path="res://assets/bird2.png" id="3_6akmb"]
 [ext_resource type="Texture2D" uid="uid://f6a5v7psm8e8" path="res://assets/bird3.png" id="4_m38mw"]

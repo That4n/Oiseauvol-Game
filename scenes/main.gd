@@ -16,9 +16,12 @@ const PIPE_RANGE : int = 200
 func _ready():
 	# Assurez-vous que tuyau_scene est bien chargé
 	if tuyau_scene == null:
-		tuyau_scene = load("res://tuyau.tscn")
+		tuyau_scene = load("res://scenes/tuyau.tscn")
+	
 	if tuyau_scene == null:
 		print("Erreur : la scène tuyau n'a pas été trouvée.")
+	else:
+		print("Scène tuyau chargée avec succès.")
 	
 	screen_size = get_window().size
 	environnement_height = $Environnement.get_node("Sprite2D").texture.get_height()
@@ -62,8 +65,15 @@ func _on_tuyau_timer_timeout() -> void:
 	generate_pipes()
 
 func generate_pipes():
+	if tuyau_scene == null:
+		print("Erreur : `tuyau_scene` est null au moment de l'instanciation.")
+		return  # Stoppe la fonction pour éviter une erreur
+
 	var tuyau = tuyau_scene.instantiate()
-	
+	if tuyau == null:
+		print("Erreur : `tuyau` est null après instanciation.")
+		return
+
 	# Placer le tuyau à droite de l'écran
 	tuyau.position.x = screen_size.x + PIPE_DELAY
 	
@@ -73,8 +83,13 @@ func generate_pipes():
 	# Vérification de la position pour le débogage
 	print("Tuyau généré à: ", tuyau.position)
 
-	tuyau.hit.connect(oiseau_hit)
+	if not tuyau.has_signal("hit"):
+		print("Erreur : le signal `hit` n'existe pas dans tuyau.")
+	else:
+		tuyau.hit.connect(oiseau_hit)
+
 	add_child(tuyau)  # Ajouter correctement à la scène
-	
+	pipes.append(tuyau)  # Ajouter à la liste des tuyaux
+
 func oiseau_hit():
 	pass  # Ajouter la logique pour le cas où l'oiseau touche un tuyau

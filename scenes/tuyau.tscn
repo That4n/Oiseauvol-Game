@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dlahxuebixri0"]
 
-[ext_resource type="Script" path="res://tuyau.gd" id="1_vxft3"]
+[ext_resource type="Script" path="res://scenes/tuyau.gd" id="1_vxft3"]
 [ext_resource type="Texture2D" uid="uid://v4wmlt46wvr4" path="res://assets/pipe.png" id="2_jhgs7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4i21e"]
