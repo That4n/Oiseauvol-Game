@@ -64,14 +64,15 @@ func _process(_delta):
 		$Environnement.position.x = -scroll
 		for tuyau in pipes:
 			tuyau.position.x -= SCROLL_SPEED
+			
+			if not tuyau.scored and tuyau.position.x < $Oiseau.position.x:
+				tuyau.scored = true;
+				score += 1;
 
 func _on_tuyau_timer_timeout() -> void:
 	generate_pipes()
 
 func generate_pipes():
-	if tuyau_scene == null:
-		print("Erreur : `tuyau_scene` est null au moment de l'instanciation.")
-		return  # Stoppe la fonction pour éviter une erreur
 
 	var tuyau = tuyau_scene.instantiate()
 	if tuyau == null:
