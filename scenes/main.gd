@@ -1,28 +1,21 @@
 extends Node 
 
-@export var tuyau_scene : PackedScene
+@export var tuyau_scene : PackedScene = load("res://scenes/tuyau.tscn");
+
+const SCROLL_SPEED : int = 4
+const PIPE_DELAY : int = 100
+const PIPE_RANGE : int = 200
 
 var game_running : bool
 var game_over : bool
 var scroll : int
 var score : int
-const SCROLL_SPEED : int = 4
+
 var screen_size : Vector2i
 var environnement_height : int
 var pipes : Array
-const PIPE_DELAY : int = 100
-const PIPE_RANGE : int = 200
 
 func _ready():
-	# Assurez-vous que tuyau_scene est bien chargé
-	if tuyau_scene == null:
-		tuyau_scene = load("res://scenes/tuyau.tscn")
-	
-	if tuyau_scene == null:
-		print("Erreur : la scène tuyau n'a pas été trouvée.")
-	else:
-		print("Scène tuyau chargée avec succès.")
-	
 	screen_size = get_window().size
 	environnement_height = $Environnement.get_node("Sprite2D").texture.get_height()
 	new_game()
@@ -37,14 +30,25 @@ func new_game():
 	$Oiseau.reset()
 
 func _input(event):
-	if not game_over:
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				if not game_running:
-					start_game()
-				else:
-					if $Oiseau.flying:
-						$Oiseau.flap()
+	
+	if game_over:
+		pass
+		
+	var trigger: bool = false;
+	
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			trigger = true;
+	elif event is InputEventKey:
+		if event.keycode == KEY_SPACE and event.pressed:
+			trigger = true
+			
+	if trigger:
+		if not game_running:
+			start_game()
+		else:
+			if $Oiseau.flying:
+				$Oiseau.flap()
 
 func start_game():
 	game_running = true
