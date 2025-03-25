@@ -69,6 +69,9 @@ func _process(_delta):
 				tuyau.scored = true;
 				tuyau.initial_position = Vector2(tuyau.position);
 				score += 1;
+				
+			if tuyau.moving and abs(tuyau.position.x - $Oiseau.position.x) < 50:
+				tuyau.moving = false;
 
 func _on_tuyau_timer_timeout() -> void:
 	generate_pipes()
