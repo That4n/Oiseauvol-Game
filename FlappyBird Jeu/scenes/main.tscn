@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://blj5g47uwo7m0"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_5g6v2"]
+[ext_resource type="Texture2D" uid="uid://d38ceuoo614k4" path="res://assets/bg.png" id="1_s2jh7"]
+[ext_resource type="PackedScene" uid="uid://b6xt1pam4caki" path="res://scenes/bird.tscn" id="3_4ap2d"]
+[ext_resource type="Texture2D" uid="uid://bcql5wnpq0ukf" path="res://assets/Bg-night.png" id="4_0haav"]
+[ext_resource type="PackedScene" uid="uid://d2ort7tfi33lg" path="res://scenes/ground.tscn" id="4_kx1e6"]
+[ext_resource type="FontFile" uid="uid://dlslmdhfs37tg" path="res://font/BeniRegular.woff2" id="6_64ggn"]
+[ext_resource type="PackedScene" uid="uid://snrvq7jkapgf" path="res://scenes/game_over.tscn" id="6_yk7bg"]
+[ext_resource type="VideoStream" path="res://Vidéo/Birdcage - Vidéo.ogv" id="8_jtf2j"]
+[ext_resource type="AudioStream" uid="uid://c5ho1p7b8jf87" path="res://Vidéo/Musique/SynthWave.mp3" id="9_fyhrk"]
+[ext_resource type="AudioStream" uid="uid://b3lsfrh3cjquf" path="res://Vidéo/Musique/CampagneBase.mp3" id="10_4p40t"]
+[ext_resource type="FontFile" uid="uid://0ijsfgsnsikg" path="res://font/BeniRegular.woff" id="11_qey1q"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_5g6v2")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_s2jh7")
+offset = Vector2(432, 384)
+
+[node name="Background2" type="Sprite2D" parent="."]
+position = Vector2(85.61, 145.633)
+scale = Vector2(0.80287, 0.952778)
+texture = ExtResource("4_0haav")
+offset = Vector2(432, 384)
+
+[node name="Bird" parent="." instance=ExtResource("3_4ap2d")]
+
+[node name="Ground" parent="." instance=ExtResource("4_kx1e6")]
+z_index = 1
+
+[node name="PipeTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_right = 85.0
+offset_bottom = 58.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_64ggn")
+theme_override_font_sizes/font_size = 100
+text = "SCORE : 0"
+
+[node name="GameOver" parent="." instance=ExtResource("6_yk7bg")]
+visible = false
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 720.0
+offset_bottom = 1200.0
+scale = Vector2(1.20419, 0.775248)
+stream = ExtResource("8_jtf2j")
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_fyhrk")
+volume_db = -9.089
+autoplay = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_4p40t")
+volume_db = -9.089
+autoplay = true
+
+[node name="StartPrompt" type="Label" parent="."]
+offset_left = 161.0
+offset_top = 315.0
+offset_right = 712.0
+offset_bottom = 396.0
+theme_override_fonts/font = ExtResource("11_qey1q")
+theme_override_font_sizes/font_size = 80
+text = "Espace ou clic gauche de la souris"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
