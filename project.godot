@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Oiseauvol"
-run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/name="flappy_bird_tut"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
