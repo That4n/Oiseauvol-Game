@@ -32,8 +32,8 @@ func _ready():
 	$"Video-Cinematique".z_index = 100  # ou une valeur bien plus haute que les autres nodes
 
 	# Initialisation des backgrounds
-	$Background.show()    # Background de jour
-	$Background2.hide()   # Background de nuit
+	$"Fond-Jour".show()    # Background de jour
+	$"Fond-Nuit".hide()   # Background de nuit
 
 	# Initialisation du sol (affiche le sol de jour)
 	$Ground.get_node("Sprite2D").show()
@@ -84,8 +84,8 @@ func new_game():
 	
 	# Réinitialise le thème au démarrage : état de jour
 	is_day = true
-	$Background.show()
-	$Background2.hide()
+	$"Fond-Jour".show()
+	$"Fond-Nuit".hide()
 	$Ground.get_node("Sprite2D").show()
 	$Ground.get_node("Sprite2D2").hide()
 	last_switch_score = 0
@@ -184,8 +184,8 @@ func scored():
 		is_day = not is_day  # Inverse l'état
 		if is_day:
 			# Passage au mode jour
-			$Background.show()
-			$Background2.hide()
+			$"Fond-Jour".show()
+			$"Fond-Nuit".hide()
 			$Ground.get_node("Sprite2D").show()
 			$Ground.get_node("Sprite2D2").hide()
 			
@@ -195,8 +195,8 @@ func scored():
 			print("Switching to day music")
 		else:
 			# Passage au mode nuit
-			$Background.hide()
-			$Background2.show()
+			$"Fond-Jour".hide()
+			$"Fond-Nuit".show()
 			$Ground.get_node("Sprite2D").hide()
 			$Ground.get_node("Sprite2D2").show()
 			
