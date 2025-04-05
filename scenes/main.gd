@@ -31,7 +31,7 @@ func _ready():
 	
 	screen_size = get_window().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
-	$VideoStreamPlayer.z_index = 100  # ou une valeur bien plus haute que les autres nodes
+	$"Video-Cinematique".z_index = 100  # ou une valeur bien plus haute que les autres nodes
 
 	# Initialisation des backgrounds
 	$Background.show()    # Background de jour
@@ -45,28 +45,28 @@ func _ready():
 	if day_music != null:
 		$AudioStreamPlayer.stream = day_music
 	if night_music != null:
-		$AudioStreamPlayer2.stream = night_music
+		$"Audio-Fond-Acceleré".stream = night_music
 	
 	# Démarrer la musique de jour au début
-	$AudioStreamPlayer.play()
+	$"Audio-Fond".play()
 
 	# Si on a une vidéo, on la joue
-	if $VideoStreamPlayer:
+	if $"Video-Cinematique":
 		video_playing = true
-		$VideoStreamPlayer.play()
-		$VideoStreamPlayer.finished.connect(_on_video_finished)
+		$"Video-Cinematique".play()
+		$"Video-Cinematique".finished.connect(_on_video_finished)
 	else:
 		new_game()
 
 func _on_video_finished():
 	video_playing = false
-	$VideoStreamPlayer.hide()
+	$"Video-Cinematique".hide()
 	new_game()
 
 func skip_video():
-	if $VideoStreamPlayer:
-		$VideoStreamPlayer.stop()
-		$VideoStreamPlayer.hide()
+	if $"Video-Cinematique":
+		$"Video-Cinematique".stop()
+		$"Video-Cinematique".hide()
 	video_playing = false
 	new_game()
 
@@ -93,8 +93,8 @@ func new_game():
 	last_switch_score = 0
 
 	# Réinitialisation de la musique au démarrage
-	$AudioStreamPlayer2.stop()
-	$AudioStreamPlayer.play()
+	$"Audio-Fond".play()
+	$"Audio-Fond-Acceleré".stop()
 
 func _input(event):
 	if video_playing:
@@ -183,7 +183,7 @@ func scored():
 			$Ground.get_node("Sprite2D2").hide()
 			
 			# Change la musique pour le jour
-			$AudioStreamPlayer2.stop()
+			$"Audio-Fond-Acceleré".stop()
 			$AudioStreamPlayer.play()
 			print("Switching to day music")
 		else:
@@ -195,7 +195,7 @@ func scored():
 			
 			# Change la musique pour la nuit
 			$AudioStreamPlayer.stop()
-			$AudioStreamPlayer2.play()
+			$"Audio-Fond-Acceleré".play()
 			print("Switching to night music")
 
 		last_switch_score = score

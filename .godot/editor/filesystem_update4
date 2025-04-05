@@ -3,3 +3,4 @@ res://scenes/game_over.tscn
 res://scenes/ground.tscn
 res://scenes/main.tscn
 res://scenes/pipe.tscn
+res://scenes/main.gd
