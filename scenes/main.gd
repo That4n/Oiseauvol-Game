@@ -1,34 +1,32 @@
 extends Node
 
-@export var pipe_scene : PackedScene
+@export var pipe_scene : PackedScene = load("res://scenes/pipe.tscn");
+
+const SCROLL_SPEED : int = 1
+const PIPE_DELAY : int = 100
+const PIPE_RANGE : int = 200
 
 var game_running : bool
 var game_over : bool
 var scroll
 var score
-const SCROLL_SPEED : int = 4
+
 var screen_size : Vector2i
 var ground_height : int
 var pipes : Array
-const PIPE_DELAY : int = 100
-const PIPE_RANGE : int = 200
 var video_playing : bool = false
 
 # Variables pour le switch de fond/thème
 var is_day : bool = true
 var last_switch_score : int = 0
+const DAY_SWITCH: int = 3
 
 # Références aux AudioStreamPlayers
 @export var day_music : AudioStream
 @export var night_music : AudioStream
 
 func _ready():
-	# Vérification et préchargement de la scène si nécessaire
-	if pipe_scene == null:
-		pipe_scene = load("res://Scenes/Pipe.tscn")  # Ajustez le chemin selon votre structure de projet
-		if pipe_scene == null:
-			push_error("Impossible de charger la scène de tuyau. Vérifiez le chemin dans _ready().")
-	
+
 	screen_size = get_window().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	$"Video-Cinematique".z_index = 100  # ou une valeur bien plus haute que les autres nodes
@@ -43,7 +41,7 @@ func _ready():
 
 	# Configurer les streams audio
 	if day_music != null:
-		$AudioStreamPlayer.stream = day_music
+		$"Audio-Fond".stream = day_music
 	if night_music != null:
 		$"Audio-Fond-Acceleré".stream = night_music
 	
@@ -97,22 +95,34 @@ func new_game():
 	$"Audio-Fond-Acceleré".stop()
 
 func _input(event):
-	if video_playing:
-		if event is InputEventMouseButton and event.pressed:
-			skip_video()
-		return
-
-	if game_over == false:
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				if game_running == false:
-					start_game()
-				else:
-					if $Bird.flying:
-						$Bird.flap()
-						check_top()
+		
+	var trigger: bool = false;
+	
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			trigger = true;
+	elif event is InputEventKey:
+		if event.keycode == KEY_SPACE and event.pressed:
+			trigger = true
+			
+	if trigger:
+		
+		if video_playing:
+			skip_video();
+			return;
+			
+		if game_over:
+			pass
+		
+		if not game_running:
+			start_game()
+		else:
+			if $Bird.flying:
+				$Bird.flap()
+				check_top()
 
 func start_game():
+	is_day = true;
 	game_running = true
 	$Bird.flying = true
 	$Bird.flap()
@@ -133,9 +143,6 @@ func _on_pipe_timer_timeout():
 	generate_pipes()
 
 func generate_pipes():
-	if pipe_scene == null:
-		push_error("pipe_scene est toujours null après tentative de chargement!")
-		return
 		
 	var pipe = pipe_scene.instantiate()
 	pipe.position.x = screen_size.x + PIPE_DELAY
@@ -173,7 +180,7 @@ func scored():
 	$ScoreLabel.text = "SCORE: " + str(score)
 	
 	# Vérifie si le score est multiple de 10 et que c'est un nouveau palier
-	if score > 0 and score % 10 == 0 and score != last_switch_score:
+	if score > 0 and score % DAY_SWITCH == 0 and score != last_switch_score:
 		is_day = not is_day  # Inverse l'état
 		if is_day:
 			# Passage au mode jour
@@ -184,7 +191,7 @@ func scored():
 			
 			# Change la musique pour le jour
 			$"Audio-Fond-Acceleré".stop()
-			$AudioStreamPlayer.play()
+			$"Audio-Fond".play()
 			print("Switching to day music")
 		else:
 			# Passage au mode nuit
@@ -194,7 +201,7 @@ func scored():
 			$Ground.get_node("Sprite2D2").show()
 			
 			# Change la musique pour la nuit
-			$AudioStreamPlayer.stop()
+			$"Audio-Fond".stop()
 			$"Audio-Fond-Acceleré".play()
 			print("Switching to night music")
 
