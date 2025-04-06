@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://k1mt4xxw15kr"]
+
+[ext_resource type="Script" path="res://scenes/projectile.gd" id="1_5vy54"]
+[ext_resource type="Texture2D" uid="uid://g6eb3d7agm7o" path="res://assets/feather.webp" id="1_7ec8p"]
+
+[node name="Projectile" type="Area2D"]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_5vy54")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = 4.28827
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_7ec8p")
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-6, -14, -13, -28, -40, -15, -53, -43, -67, -37, -73, -51, -87, -45, -94, -58, -108, -52, -114, -66, -128, -60, -122, -46, -135, -40, -123, -12, -137, -5, -112, 50, -98, 44, -85, 72, -71, 66, -65, 80, -51, 73, -45, 87, -31, 81, -24, 95, -10, 89, -4, 103, 24, 90, 30, 104, 72, 85, 66, 71, 94, 59, 88, 45, 101, 38, 95, 24, 109, 18, 103, 4, 117, -2, 98, -44, 112, -50, 93, -92, 79, -86, 73, -100, 59, -94, 65, -80, 51, -73, 63, -46, 50, -39, 56, -25, 42, -19, 36, -33, -6, -14)

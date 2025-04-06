@@ -88,3 +88,9 @@ func reset_position():
 	position = initial_position
 	move_progression = 0
 	move_direction = 0
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.name == "Projectile":
+		queue_free();
+		area.queue_free();

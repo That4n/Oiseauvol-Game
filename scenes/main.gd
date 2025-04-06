@@ -1,6 +1,7 @@
 extends Node
 
-@export var pipe_scene : PackedScene = load("res://scenes/pipe.tscn");
+var pipe_scene : PackedScene = load("res://scenes/pipe.tscn");
+var projectile_scene : PackedScene = load("res://scenes/projectile.tscn");
 
 const SCROLL_SPEED : int = 3
 const SPEED_FACTOR: int = 100
@@ -26,6 +27,10 @@ var pipe_delay = PIPE_DELAY;
 var is_day : bool = true
 var last_switch_score : int = 0
 const DAY_SWITCH: int = 3
+
+# Shoot
+var can_shoot: bool = false;
+var projectiles: Array = [];
 
 # Références aux AudioStreamPlayers
 @export var day_music : AudioStream
@@ -80,13 +85,20 @@ func new_game():
 	score = 0
 	scroll = 0
 	pipe_delay = PIPE_DELAY
+	can_shoot = false;
 	$ScoreLabel.text = "SCORE: " + str(score)
 	$GameOver.hide()
 	# Afficher le message d'instruction
 	$StartPrompt.show()
-	get_tree().call_group("pipes", "queue_free")
+	for pipe in pipes:
+		if is_instance_valid(pipe):
+			pipe.queue_free();
 	pipes.clear()
 	generate_pipes()
+	for proj in projectiles:
+		if is_instance_valid(proj):
+			proj.queue_free();
+	projectiles.clear();
 	$Bird.reset()
 	
 	# Réinitialise le thème au démarrage : état de jour
@@ -119,7 +131,7 @@ func _input(event):
 			return;
 			
 		if game_over:
-			pass
+			return
 		
 		if not game_running:
 			start_game()
@@ -138,16 +150,36 @@ func start_game():
 	$StartPrompt.hide()
 
 func _process(delta):
+	
+	if game_over:
+		return;
+	
 	if game_running:
+		
 		scroll += SCROLL_SPEED * delta * SPEED_FACTOR
 		if scroll >= screen_size.x:
 			scroll = 0
+			
 		$Ground.position.x = -scroll
+		
 		for pipe in pipes:
+			
+			if not is_instance_valid(pipe):
+				pipes.remove_at(pipes.find(pipe));
+				continue
+			
 			pipe.position.x -= SCROLL_SPEED * delta * SPEED_FACTOR
 			
 			if pipe.moving and abs(pipe.position.x - $Bird.position.x) < 50:
 				pipe.moving = false;
+				
+		if can_shoot and Input.is_action_just_pressed("shoot"):
+			can_shoot = false;
+			
+			var projectile = projectile_scene.instantiate();
+			projectile.position = $Bird.position
+			projectiles.append(projectile);
+			add_child(projectile);
 
 func _on_pipe_timer_timeout():
 	generate_pipes()
@@ -227,6 +259,7 @@ func scored():
 		
 		# Optionnel : mettre à jour les tuyaux existants
 		for pipe in pipes:
+			
 			if is_day:
 				if pipe.has_node("Upper-nuit"):
 					pipe.get_node("Upper-nuit").hide()
@@ -268,3 +301,6 @@ func _on_ground_hit():
 
 func _on_game_over_restart():
 	new_game()
+
+func _on_projectile_timer_timeout() -> void:
+	can_shoot = true

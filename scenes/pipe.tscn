@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cr3pl7yfk32tb"]
 
-[ext_resource type="Script" uid="uid://c14liu0d1cbyx" path="res://scenes/pipe.gd" id="1_i8p56"]
+[ext_resource type="Script" path="res://scenes/pipe.gd" id="1_i8p56"]
 [ext_resource type="Texture2D" uid="uid://dcvgetf81oc4q" path="res://assets/nuit-pipe.png" id="2_bfkph"]
 [ext_resource type="Texture2D" uid="uid://den4sx3n8oo4t" path="res://assets/pipe.png" id="2_jcmtj"]
 
@@ -62,5 +62,6 @@ shape = SubResource("RectangleShape2D_0wuvw")
 position = Vector2(59, 1)
 shape = SubResource("RectangleShape2D_51tso")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]
