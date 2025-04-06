@@ -2,9 +2,13 @@ extends Node
 
 @export var pipe_scene : PackedScene = load("res://scenes/pipe.tscn");
 
-const SCROLL_SPEED : int = 1
+const SCROLL_SPEED : int = 3
+const SPEED_FACTOR: int = 100
+
 const PIPE_DELAY : int = 100
 const PIPE_RANGE : int = 200
+const PIPE_MOVING : int = 3
+const PIPE_DELAY_DECREASE = 10
 
 var game_running : bool
 var game_over : bool
@@ -13,8 +17,10 @@ var score
 
 var screen_size : Vector2i
 var ground_height : int
-var pipes : Array
 var video_playing : bool = false
+
+var pipes : Array
+var pipe_delay = PIPE_DELAY;
 
 # Variables pour le switch de fond/thème
 var is_day : bool = true
@@ -132,20 +138,27 @@ func start_game():
 
 func _process(delta):
 	if game_running:
-		scroll += SCROLL_SPEED
+		scroll += SCROLL_SPEED * delta * SPEED_FACTOR  # Le *100 permet de garder une valeur raisonnable pour SCROLL_SPEED
 		if scroll >= screen_size.x:
 			scroll = 0
 		$Ground.position.x = -scroll
 		for pipe in pipes:
-			pipe.position.x -= SCROLL_SPEED
+			pipe.position.x -= SCROLL_SPEED * delta * SPEED_FACTOR
+			
+			if pipe.moving and abs(pipe.position.x - $Bird.position.x) < 50:
+				pipe.moving = false;
 
 func _on_pipe_timer_timeout():
 	generate_pipes()
 
 func generate_pipes():
+	
+	if score > 0 and score % PIPE_DELAY_DECREASE == 0:
+		if pipe_delay > PIPE_DELAY / 3:
+			pipe_delay = min(PIPE_DELAY, pipe_delay - 10)
 		
 	var pipe = pipe_scene.instantiate()
-	pipe.position.x = screen_size.x + PIPE_DELAY
+	pipe.position.x = screen_size.x + pipe_delay
 	pipe.position.y = (screen_size.y - ground_height) / 2 + randi_range(-PIPE_RANGE, PIPE_RANGE)
 	pipe.hit.connect(bird_hit)
 	pipe.scored.connect(scored)
@@ -171,6 +184,10 @@ func generate_pipes():
 			pipe.get_node("Upper-nuit").show()
 		if pipe.has_node("Lower-nuit"):
 			pipe.get_node("Lower-nuit").show()
+			
+	if len(pipes) > 0 and len(pipes) % PIPE_MOVING == 0:
+		pipe.initial_position = Vector2(pipe.position);
+		pipe.set_moving(true)
 	
 	add_child(pipe)
 	pipes.append(pipe)
