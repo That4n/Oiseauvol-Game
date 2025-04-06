@@ -79,6 +79,7 @@ func new_game():
 	game_over = false
 	score = 0
 	scroll = 0
+	pipe_delay = PIPE_DELAY
 	$ScoreLabel.text = "SCORE: " + str(score)
 	$GameOver.hide()
 	# Afficher le message d'instruction
@@ -138,7 +139,7 @@ func start_game():
 
 func _process(delta):
 	if game_running:
-		scroll += SCROLL_SPEED * delta * SPEED_FACTOR  # Le *100 permet de garder une valeur raisonnable pour SCROLL_SPEED
+		scroll += SCROLL_SPEED * delta * SPEED_FACTOR
 		if scroll >= screen_size.x:
 			scroll = 0
 		$Ground.position.x = -scroll
