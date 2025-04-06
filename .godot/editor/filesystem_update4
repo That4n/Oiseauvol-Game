@@ -1,0 +1,6 @@
+res://scenes/main.tscn
+res://scenes/main.gd
+res://scenes/projectile.tscn
+res://scenes/projectile.gd
+res://scenes/pipe.gd
+res://scenes/pipe.tscn
