@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://k1mt4xxw15kr"]
 
-[ext_resource type="Script" path="res://scenes/projectile.gd" id="1_5vy54"]
+[ext_resource type="Script" uid="uid://pbpkin78oqid" path="res://scenes/projectile.gd" id="1_5vy54"]
 [ext_resource type="Texture2D" uid="uid://g6eb3d7agm7o" path="res://assets/feather.webp" id="1_7ec8p"]
 
 [node name="Projectile" type="Area2D"]

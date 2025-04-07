@@ -2,7 +2,7 @@ extends Area2D
 
 const GRAVITY: float = 15
 const SPEED: float = 350
-const ROTATION: float = 25;
+const ROTATION: float = 150;
 
 func _ready() -> void:
 	pass
@@ -15,4 +15,4 @@ func _process(delta: float) -> void:
 		return;
 		
 	position += Vector2(SPEED, GRAVITY) * delta;
-	rotation -= ROTATION;
+	rotation += deg_to_rad(ROTATION) * delta;
