@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1743956189
+::res://::1744006626
 ::res://assets/::1743839246
 Bg-night.png::CompressedTexture2D/CompressedTexture2D::2560551052071779601::1743839116::1743839246::1::::<><><>0<>0<>ed7f0037b4ac4f290a2c0f6c1a4645c2<>res://.godot/imported/Bg-night.png-0032d010bc3e41b1c2cf689164579bc1.ctex::
 bg.png::CompressedTexture2D/CompressedTexture2D::9192803788762177893::1743839116::1743839246::1::::<><><>0<>0<>ea88479439d486c6e9565c3711144d60<>res://.godot/imported/bg.png-23a59c2e9cba2223a50fa3fe41b70b25.ctex::
@@ -24,17 +24,17 @@ BeniLight.woff2::FontFile/FontFile::1648995268663921211::1743839116::1743839245:
 BeniRegular.ttf::FontFile/FontFile::5933113988494959379::1743839116::1743839245::1::::<><><>0<>0<>8085ed945cf0140cd54b52d74b20ffc6<>res://.godot/imported/BeniRegular.ttf-66a442433b28eb0a0635291553a34c27.fontdata::
 BeniRegular.woff::FontFile/FontFile::1771814982929978394::1743839116::1743839245::1::::<><><>0<>0<>311ed82f64236c15d35cc99316888bc8<>res://.godot/imported/BeniRegular.woff-8a435689315f5f93783570a106869f46.fontdata::
 BeniRegular.woff2::FontFile/FontFile::7969187615754075884::1743839116::1743839245::1::::<><><>0<>0<>fdaaac1bb84b34678f12416f8fe263d0<>res://.godot/imported/BeniRegular.woff2-09e154cbbc6ac84e61cf0956ebedd343.fontdata::
-::res://scenes/::1743842525
+::res://scenes/::1743961702
 bird.gd::GDScript/GDScript::6127149373502801693::1743839116::0::1::::<>CharacterBody2D<><>0<>0<><>::
 bird.tscn::PackedScene/PackedScene::4610956366753879868::1743839258::0::1::::<><><>0<>0<><>::uid://ctkbiw1jql1jl::::res://scenes/bird.gd<>uid://dfuofh4nwer0n::::res://assets/bird1.png<>uid://533ubvnyvpxe::::res://assets/bird2.png<>uid://cb3fw6j2c364v::::res://assets/bird3.png
 game_over.gd::GDScript/GDScript::3744411286146595994::1743839116::0::1::::<>CanvasLayer<><>0<>0<><>::
 game_over.tscn::PackedScene/PackedScene::1291306677066036045::1743839258::0::1::::<><><>0<>0<><>::uid://btl253js4s763::::res://scenes/game_over.gd<>uid://c57fej47adq38::::res://assets/restart.png
 ground.gd::GDScript/GDScript::2173104514820778841::1743839116::0::1::::<>Area2D<><>0<>0<><>::
 ground.tscn::PackedScene/PackedScene::9084329947161726892::1743839258::0::1::::<><><>0<>0<><>::uid://57wyjhy50inx::::res://scenes/ground.gd<>uid://b5dkxllminsgx::::res://assets/nuit-ground.png<>uid://cum5khv3jtce1::::res://assets/ground.png
-main.gd::GDScript::1902153650049104008::1743842134::0::1::::<>Node<><>0<>0<><>::
-main.tscn::PackedScene::3178911161594009601::1743842525::0::1::::<><><>0<>0<><>::uid://2dogs1g48inw::::res://scenes/main.gd<>uid://d38ceuoo614k4::::res://assets/bg.png<>uid://b6xt1pam4caki::::res://scenes/bird.tscn<>uid://bcql5wnpq0ukf::::res://assets/Bg-night.png<>uid://d2ort7tfi33lg::::res://scenes/ground.tscn<>uid://dlslmdhfs37tg::::res://font/BeniRegular.woff2<>uid://snrvq7jkapgf::::res://scenes/game_over.tscn<>uid://fq5tli25ujxb::::res://Vidéo/Birdcage - Vidéo.ogv<>uid://c5ho1p7b8jf87::::res://Vidéo/Musique/SynthWave.mp3<>uid://b3lsfrh3cjquf::::res://Vidéo/Musique/CampagneBase.mp3<>uid://0ijsfgsnsikg::::res://font/BeniRegular.woff
-pipe.gd::GDScript::6658301519372692763::1743842502::0::1::::<>Area2D<><>0<>0<><>::
-pipe.tscn::PackedScene::6024786403035060627::1743842490::0::1::::<><><>0<>0<><>::uid://c14liu0d1cbyx::::res://scenes/pipe.gd<>uid://dcvgetf81oc4q::::res://assets/nuit-pipe.png<>uid://den4sx3n8oo4t::::res://assets/pipe.png
+main.gd::GDScript::1902153650049104008::1743961702::0::1::::<>Node<><>0<>0<><>::
+main.tscn::PackedScene::3178911161594009601::1743959483::0::1::::<><><>0<>0<><>::uid://2dogs1g48inw::::res://scenes/main.gd<>uid://d38ceuoo614k4::::res://assets/bg.png<>uid://b6xt1pam4caki::::res://scenes/bird.tscn<>uid://bcql5wnpq0ukf::::res://assets/Bg-night.png<>uid://d2ort7tfi33lg::::res://scenes/ground.tscn<>uid://dlslmdhfs37tg::::res://font/BeniRegular.woff2<>uid://snrvq7jkapgf::::res://scenes/game_over.tscn<>uid://fq5tli25ujxb::::res://Vidéo/Birdcage - Vidéo.ogv<>uid://c5ho1p7b8jf87::::res://Vidéo/Musique/SynthWave.mp3<>uid://b3lsfrh3cjquf::::res://Vidéo/Musique/CampagneBase.mp3<>uid://0ijsfgsnsikg::::res://font/BeniRegular.woff
+pipe.gd::GDScript::6658301519372692763::1743959272::0::1::::<>Area2D<><>0<>0<><>::
+pipe.tscn::PackedScene::6024786403035060627::1743959440::0::1::::<><><>0<>0<><>::uid://c14liu0d1cbyx::::res://scenes/pipe.gd<>uid://dcvgetf81oc4q::::res://assets/nuit-pipe.png<>uid://den4sx3n8oo4t::::res://assets/pipe.png
 ::res://Vidéo/::1743839245
 Birdcage - Vidéo.ogv::VideoStreamTheora/VideoStreamTheora::385830293505235987::1743839116::0::1::::<><><>0<>0<><>::
 ::res://Vidéo/Musique/::1743839245
